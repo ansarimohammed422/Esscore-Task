@@ -36,7 +36,7 @@ function Certificates() {
   return (
     <section id="certificates" className=" ">
       <div className="container mx-auto p-5 ">
-        <div className=" py-10 my-20 rounded-3xl bg-white shadow-xl text-center">
+        <div className=" py-10 my-20 rounded-3xl bg-blue-50 shadow-xl text-center">
           <h2 className="text-5xl font-bold text-blue-500 mb-4">
             Certifications
           </h2>
