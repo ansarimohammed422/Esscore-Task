@@ -59,7 +59,7 @@ export default function AnimatedTimeline() {
         viewport={{ once: true, margin: "-100px" }}
         className="mb-16 text-center max-w-4xl mx-auto"
       >
-        <h2 className="text-display-sm font-roboto-medium text-on-background">
+        <h2 className=" font-roboto-medium text-4xl text-primary font-bold">
           Why Choose Esscore
         </h2>
         <p className="text-body-lg text-on-surface-variant mt-4">

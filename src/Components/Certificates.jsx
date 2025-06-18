@@ -134,7 +134,7 @@ function Certificates() {
       >
         {/* Header */}
         <motion.div variants={item} custom={0} className="text-center mb-20">
-          <motion.h2 className="text-display-md font-roboto-medium text-on-background mb-6">
+          <motion.h2 className="text-4xl font-bold font-roboto-medium text-primary mb-6">
             Our Certifications
           </motion.h2>
           <motion.p className="text-body-lg text-on-surface-variant max-w-2xl mx-auto">
