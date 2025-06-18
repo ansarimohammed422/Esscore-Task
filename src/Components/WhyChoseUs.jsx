@@ -37,16 +37,14 @@ export default function AnimatedTimeline() {
     offset: ["start center", "end center"],
   });
 
-  // Animated values for the timeline line
   const lineScale = useTransform(scrollYProgress, [0, 1], [0.1, 1]);
   const lineOpacity = useTransform(scrollYProgress, [0, 0.2, 1], [0, 1, 1]);
 
-  // Calculate card positions to prevent overlap
   const cardPositions = [
-    { top: "10%", left: "0%" },
-    { top: "30%", left: "50%" },
-    { top: "50%", left: "0%" },
-    { top: "70%", left: "50%" },
+    { top: "10%", left: "5%" },
+    { top: "30%", left: "55%" },
+    { top: "50%", left: "5%" },
+    { top: "70%", left: "55%" },
   ];
 
   return (
@@ -54,7 +52,6 @@ export default function AnimatedTimeline() {
       ref={ref}
       className="relative w-full min-h-[200vh] bg-surface-variant py-16 px-4 overflow-hidden"
     >
-      {/* Section Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -71,15 +68,12 @@ export default function AnimatedTimeline() {
         </p>
       </motion.div>
 
-      {/* Desktop Timeline */}
       <div className="hidden lg:block relative h-[150vh] max-w-6xl mx-auto">
-        {/* Animated Timeline Line */}
         <motion.div
           style={{ scaleY: lineScale, opacity: lineOpacity }}
           className="absolute left-1/2 top-0 h-full w-1 bg-primary origin-top"
         />
 
-        {/* Cards Container */}
         <div className="relative h-full">
           {trustFeatures.map((item, index) => {
             const Icon = item.icon;
@@ -104,13 +98,10 @@ export default function AnimatedTimeline() {
                   top: position.top,
                   left: position.left,
                 }}
-                className="absolute w-[45%]"
+                className="absolute w-[40%]"
                 transition={{ type: "spring", bounce: 0.3 }}
               >
-                <div
-                  className={`relative p-8 rounded-2xl bg-surface shadow-lg border border-outline-variant`}
-                >
-                  {/* Icon Badge */}
+                <div className="relative p-8 rounded-2xl bg-surface shadow-lg border border-outline-variant">
                   <div
                     className={`absolute -top-6 ${
                       index % 2 === 0 ? "-right-6" : "-left-12"
@@ -130,7 +121,6 @@ export default function AnimatedTimeline() {
                     {item.description}
                   </p>
 
-                  {/* Connector Line */}
                   <div
                     className={`absolute top-1/2 ${
                       index % 2 === 0 ? "-right-16" : "-left-16"
@@ -143,9 +133,7 @@ export default function AnimatedTimeline() {
         </div>
       </div>
 
-      {/* Mobile Timeline */}
       <div className="lg:hidden relative">
-        {/* Vertical timeline line */}
         <motion.div
           initial={{ scaleY: 0 }}
           whileInView={{ scaleY: 1 }}
@@ -153,7 +141,6 @@ export default function AnimatedTimeline() {
           className="absolute left-6 top-0 bottom-0 w-1 bg-primary-container origin-top"
         />
 
-        {/* Cards Container */}
         <div className="ml-16 space-y-12">
           {trustFeatures.map((item, index) => {
             const Icon = item.icon;
@@ -167,17 +154,13 @@ export default function AnimatedTimeline() {
                 viewport={{ once: true, margin: "-50px" }}
                 className="relative"
               >
-                {/* Icon Dot */}
                 <div
                   className={`absolute -left-11 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-${item.color} flex items-center justify-center shadow-md`}
                 >
                   <Icon className="w-4 h-4 text-on-${item.color}" />
                 </div>
 
-                {/* Card */}
-                <div
-                  className={`p-6 rounded-xl bg-surface-container border border-outline-variant shadow-sm`}
-                >
+                <div className="p-6 rounded-xl bg-surface-container border border-outline-variant shadow-sm">
                   <h3
                     className={`text-title-md font-roboto-medium text-${item.color} mb-2`}
                   >
@@ -193,7 +176,6 @@ export default function AnimatedTimeline() {
         </div>
       </div>
 
-      {/* Decorative Elements */}
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 0.1 }}

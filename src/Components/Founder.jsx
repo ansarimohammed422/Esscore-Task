@@ -3,11 +3,9 @@ import { motion } from "framer-motion";
 import founderImg from "../assets/Founder.jpg";
 
 export default function Founder() {
-  // Define M3 Expressive spring transitions for Framer Motion
-  // These parameters are based on "Table 3: Material 3 Expressive Motion Physics Spring Parameters (Web Equivalents)"
   const expressiveSpatialTransition = {
     type: "spring",
-    stiffness: 200, // For smooth spatial transitions
+    stiffness: 200,
     damping: 20,
     mass: 1,
     velocity: 0,
@@ -15,80 +13,73 @@ export default function Founder() {
 
   const expressiveEffectsTransition = {
     type: "spring",
-    stiffness: 300, // For quicker effects (e.g., button hovers)
+    stiffness: 300,
     damping: 25,
     mass: 0.8,
     velocity: 0,
   };
 
   return (
-    <section
-      // Background using M3 surface-container-lowest for a clean base
-      className="relative w-full py-16 px-4 md:px-8 min-h-screen flex items-center justify-center bg-surface-variant font-roboto overflow-hidden"
-    >
-      {/* Decorative Blur Circles (subtle motion, layered) */}
+    <section className="relative flex items-center justify-center w-full min-h-screen px-4 py-16 md:px-8 overflow-hidden bg-surface-variant font-roboto">
+      {/* Decorative Blur Circles */}
       <motion.div
-        initial={{ y: -80, x: -80, opacity: 0 }}
-        whileInView={{ y: 0, x: 0, opacity: 0.2 }}
+        initial={{ x: -80, y: -80, opacity: 0 }}
+        whileInView={{ x: 0, y: 0, opacity: 0.2 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
         viewport={{ once: true }}
-        className="absolute top-0 left-0 w-72 h-72 rounded-full bg-primary-container blur-3xl z-0"
+        className="absolute top-0 left-0 z-0 w-72 h-72 bg-primary-container rounded-full blur-3xl"
       />
       <motion.div
-        initial={{ y: 80, x: 80, opacity: 0 }}
-        whileInView={{ y: 0, x: 0, opacity: 0.2 }}
+        initial={{ x: 80, y: 80, opacity: 0 }}
+        whileInView={{ x: 0, y: 0, opacity: 0.2 }}
         transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
         viewport={{ once: true }}
-        className="absolute bottom-0 right-0 w-72 h-72 rounded-full bg-secondary-container blur-3xl z-0"
+        className="absolute bottom-0 right-0 z-0 w-72 h-72 bg-secondary-container rounded-full blur-3xl"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        {/* Left Side: Founder's Image (prominent) */}
+      <div className="relative z-10 grid max-w-7xl grid-cols-1 gap-12 mx-auto items-center lg:grid-cols-2">
+        {/* Left: Founder's Image */}
         <motion.div
           initial={{ x: -100, opacity: 0, scale: 0.9 }}
           whileInView={{ x: 0, opacity: 1, scale: 1 }}
           transition={{ ...expressiveSpatialTransition, delay: 0.2 }}
           viewport={{ once: true, amount: 0.5 }}
-          className="relative w-full h-[400px] md:h-[550px] rounded-xl-inc overflow-hidden shadow-2xl bg-surface-container-high"
+          className="relative w-full h-[400px] md:h-[550px] overflow-hidden rounded-xl-inc shadow-2xl bg-surface-container-high"
         >
-          {/* Dummy image of employees representing the founder's vision/team */}
           <img
             src={founderImg}
             alt="Founder and team working together"
-            className="w-full h-full object-cover object-center"
+            className="object-cover object-center w-full h-full"
           />
-          {/* Subtle gradient overlay on image for depth */}
           <div className="absolute inset-0 bg-gradient-to-t from-scrim/30 to-transparent" />
         </motion.div>
 
-        {/* Right Side: Founder's Message Content Card */}
+        {/* Right: Founder's Message */}
         <motion.div
           initial={{ x: 100, opacity: 0, scale: 0.9 }}
           whileInView={{ x: 0, opacity: 1, scale: 1 }}
           transition={{ ...expressiveSpatialTransition, delay: 0.3 }}
           viewport={{ once: true, amount: 0.5 }}
-          className="bg-surface-container-highest p-8 sm:p-12 rounded-xl-inc shadow-xl border border-outline/20 space-y-6 text-center lg:text-left" // M3E colors, shapes, shadow
+          className="p-8 space-y-6 text-center border rounded-xl-inc shadow-xl bg-surface-container-highest sm:p-12 lg:text-left border-outline/20"
         >
-          {/* Heading */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ ...expressiveEffectsTransition, delay: 0.4 }}
             viewport={{ once: true }}
-            className="text-display-sm md:text-display-md font-roboto-medium text-on-background" // M3E Typography and color
+            className="font-roboto-medium text-display-sm md:text-display-md text-on-background"
           >
             A Message From Our <span className="text-primary">Founder</span>
           </motion.h1>
 
-          {/* Quote */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ ...expressiveEffectsTransition, delay: 0.5 }}
             viewport={{ once: true }}
-            className="text-body-lg md:text-headline-sm leading-relaxed font-light relative text-on-surface-variant" // M3E Typography and color
+            className="relative font-light leading-relaxed text-body-lg md:text-headline-sm text-on-surface-variant"
           >
-            <span className="text-5xl absolute -left-2 -top-4 text-primary opacity-70">
+            <span className="absolute text-5xl text-primary opacity-70 -left-2 -top-4">
               “
             </span>
             At Esscore Foundation, our journey began with a singular vision: to
@@ -96,41 +87,38 @@ export default function Founder() {
             high-quality chemical ingredients. We are dedicated to fostering
             partnerships built on trust, integrity, and a relentless pursuit of
             innovation.
-            <span className="text-5xl absolute -right-2 -bottom-4 text-primary opacity-70">
+            <span className="absolute text-5xl text-primary opacity-70 -right-2 -bottom-4">
               ”
             </span>
           </motion.p>
 
-          {/* Name + Designation */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ ...expressiveEffectsTransition, delay: 0.6 }}
             viewport={{ once: true }}
-            className="mt-4 text-title-md font-roboto-medium text-on-surface-variant" // M3E Typography and color
+            className="mt-4 font-roboto-medium text-title-md text-on-surface-variant"
           >
             — Mr. Kiran Madhyan, Founder & Director
           </motion.div>
 
-          {/* CTA Button */}
           <motion.a
-            href="/message" // Standard HTML link for navigation
-            className="inline-flex group items-center justify-center px-8 py-3 bg-primary text-on-primary rounded-lg-inc text-label-lg font-roboto-medium shadow-md" // M3E styling
+            href="/message"
+            className="inline-flex items-center justify-center px-8 py-3 font-roboto-medium text-label-lg text-on-primary bg-primary rounded-lg-inc shadow-md group"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ ...expressiveEffectsTransition, delay: 0.7 }}
             viewport={{ once: true }}
             whileHover={{
               scale: 1.05,
-              boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.2)", // M3E elevation
+              boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.2)",
             }}
             whileTap={{ scale: 0.95 }}
           >
             <span>Read Full Message</span>
-            {/* Inline SVG for arrow icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="ml-2 transition-transform duration-150 group-hover:translate-x-1" // Subtle arrow animation
+              className="ml-2 transition-transform duration-150 group-hover:translate-x-1"
               width="24"
               height="24"
               viewBox="0 0 24 24"

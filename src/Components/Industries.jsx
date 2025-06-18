@@ -83,29 +83,36 @@ const IndustriesGrid = () => {
   const cardVariants = {
     hidden: (i) => ({
       opacity: 0,
-      x: i % 2 === 0 ? -100 : 100,
+      x: i % 2 === 0 ? -60 : 60,
       scale: 0.95,
+      rotate: i % 2 === 0 ? -2 : 2,
     }),
     visible: {
       opacity: 1,
       x: 0,
       scale: 1,
-      transition: { type: "spring", stiffness: 100, damping: 20 },
+      rotate: 0,
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 18,
+        mass: 0.8,
+      },
     },
   };
 
   const contentVariants = {
     collapsed: {
       opacity: 0,
-      y: 20,
-      height: 0,
-      transition: { duration: 0.4 },
+      y: 30,
+      scale: 0.95,
+      transition: { duration: 0.3, ease: "easeInOut" },
     },
     expanded: {
       opacity: 1,
       y: 0,
-      height: "auto",
-      transition: { duration: 0.4 },
+      scale: 1,
+      transition: { duration: 0.4, ease: "easeOut" },
     },
   };
 
@@ -134,10 +141,20 @@ const IndustriesGrid = () => {
       />
 
       <div className="container mx-auto text-center mb-16 relative z-10">
-        <motion.h2 className="text-display text-4xl font-bold text-primary mb-4">
+        <motion.h2
+          className="text-display text-4xl font-bold text-primary mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           Industries We Serve
         </motion.h2>
-        <motion.p className="text-body text-on-surface max-w-2xl mx-auto">
+        <motion.p
+          className="text-body text-on-surface max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+        >
           Diverse sectors rely on us for quality ingredients and innovation.
         </motion.p>
       </div>
@@ -161,7 +178,8 @@ const IndustriesGrid = () => {
               onHoverStart={() => !isMobile && setHovered(true)}
               onHoverEnd={() => !isMobile && setHovered(false)}
               onClick={() => isMobile && setTapped((prev) => !prev)}
-              whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}}
+              whileHover={!isMobile ? { scale: 1.03, zIndex: 10 } : {}}
+              transition={{ layout: { duration: 0.3, ease: "easeInOut" } }}
             >
               <div className="relative h-full w-full">
                 <img
@@ -175,7 +193,7 @@ const IndustriesGrid = () => {
                 </h3>
               </div>
 
-              <AnimatePresence>
+              <AnimatePresence mode="wait">
                 {isActive && (
                   <motion.div
                     className="absolute bottom-0 w-full p-6 bg-surface-container-high/95 backdrop-blur-lg rounded-b-3xl shadow-inner"

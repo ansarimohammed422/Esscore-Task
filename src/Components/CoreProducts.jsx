@@ -1,12 +1,15 @@
-mport React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import Neutra from "../assets/NeutraCard.jpg";
 import Pharma from "../assets/PharmaCard.png";
 import Food from "../assets/FoodIngCard.jpg";
 import Coating from "../assets/CoatCard.png";
 import Agro from "../assets/AgroCard.jpg";
 import Cosmetic from "../assets/CosmCard.jpg";
-import { IoArrowBack, IoArrowForward } from "react-icons/io5";
+import {
+  TbArrowBadgeLeftFilled,
+  TbArrowBadgeRightFilled,
+} from "react-icons/tb";
 
 const cards = [
   {
@@ -49,6 +52,8 @@ const cards = [
 
 const StackedCardSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
 
   const prevCard = () => {
     setActiveIndex((prev) => (prev - 1 + cards.length) % cards.length);
@@ -60,44 +65,71 @@ const StackedCardSlider = () => {
 
   return (
     <section
-      className="w-full min-h-screen bg-surface-variant pt-16 pb-28 px-4 flex flex-col items-center"
+      ref={sectionRef}
       id="product"
+      className="w-full min-h-screen bg-surface-variant py-16 px-4 flex flex-col items-center"
     >
       <h2 className="text-4xl font-bold text-primary mb-4">Core Products</h2>
       <p className="text-gray-600 mb-10 max-w-xl text-center">
         Scroll through our key offerings using the arrows below. Each card
         contains a high-quality product description and call to action.
       </p>
+
       <div className="w-full flex justify-evenly items-center h-auto">
+        {/* Left arrow */}
         <button
           onClick={prevCard}
-          className="px-4 py-2 h-20 bg-primary-container rounded-full shadow-2xl hover:bg-primary transition"
+          className="flex justify-center items-center px-4 py-2 h-20 w-20 text-primary hover:text-on-primary bg-primary-container  rounded-full shadow-2xl hover:bg-primary transition"
         >
-          <IoArrowBack className="text-2xl" />
+          <TbArrowBadgeLeftFilled size={46} className="text-2xl" />
         </button>
-        <div className="relative w-[400px]  h-[600px]">
+
+        {/* Cards stack */}
+        <div className="relative w-[400px] h-[600px]">
           {cards.map((card, i) => {
             const indexFromActive =
               (i - activeIndex + cards.length) % cards.length;
-            const zIndex = cards.length - indexFromActive;
             const isActive = i === activeIndex;
+            const zIndex = cards.length - indexFromActive;
+            const direction =
+              indexFromActive === 0
+                ? 0
+                : indexFromActive <= Math.floor(cards.length / 2)
+                ? -1
+                : 1;
+
+            const shouldTilt = !isActive && indexFromActive <= 2;
 
             return (
               <motion.div
                 key={i}
-                className="absolute w-full h-full hover:scale-105 transition-transform duration-150 ease-linear bg-surface rounded-xl shadow-xl p-6 flex flex-col items-start justify-between"
-                style={{
-                  transformOrigin: "bottom center",
+                className="absolute w-full h-full bg-surface border border-primary/50 rounded-xl shadow-xl p-6 flex flex-col items-start justify-between"
+                style={{ transformOrigin: "bottom center" }}
+                initial={{
+                  x: 80 * direction,
+                  y: 40,
+                  scale: 0.9,
+                  rotate: shouldTilt ? 10 * direction : 0,
+                  opacity: 0,
                 }}
-                animate={{
-                  scale: isActive ? 1 : 0.92 - indexFromActive * 0.02,
-                  rotate: isActive ? 0 : -4 * indexFromActive,
-                  y: isActive ? 0 : indexFromActive * 10,
-                  x: isActive ? 0 : 0,
-                  zIndex,
-                  opacity: indexFromActive > 2 ? 0 : 1,
+                animate={
+                  isInView
+                    ? {
+                        x: 0,
+                        y: isActive ? 0 : indexFromActive * 10,
+                        scale: isActive ? 1 : 0.92 - indexFromActive * 0.02,
+                        rotate: shouldTilt ? 6 * direction : 0,
+                        opacity: indexFromActive > 2 ? 0 : 1,
+                        zIndex,
+                      }
+                    : {}
+                }
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 30,
+                  delay: 0.1 * indexFromActive,
                 }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
               >
                 <img
                   src={card.icon}
@@ -105,13 +137,15 @@ const StackedCardSlider = () => {
                   className="w-full h-[300px] object-cover rounded-lg mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
-                  <p className="text-sm text-gray-600 mb-4">
+                  <h3 className="text-title-md font-roboto-medium text-on-background mb-2">
+                    {card.title}
+                  </h3>
+                  <p className="text-body-md text-on-surface-variant mb-4">
                     {card.description}
                   </p>
                   <a
                     href="/products"
-                    className="inline-block bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700 transition"
+                    className="inline-block bg-primary text-on-primary py-2 px-4 rounded-lg hover:bg-primary-dark transition"
                   >
                     View Product
                   </a>
@@ -120,11 +154,18 @@ const StackedCardSlider = () => {
             );
           })}
         </div>
+
+        {/* Right arrow */}
         <button
           onClick={nextCard}
-          className="px-4 py-2 h-20 rounded-full bg-primary-container rounded hover:bg-primary shadow-2xl transition"
+          className="flex justify-center items-center px-4 py-2 h-20 w-20 rounded-full bg-primary-container text-primary hover:text-on-primary hover:bg-primary shadow-2xl transition"
         >
-          <IoArrowForward className="text-2xl" />
+          <TbArrowBadgeRightFilled size={46} className="text-2xl " />
+        </button>
+      </div>
+      <div className="mt-20 mb-0">
+        <button className="inline-block text-xl hover:scale-105 transition-all duration-150 ease-linear bg-primary text-on-primary py-2 px-4 rounded-lg hover:bg-primary-dark hover:bg-on-primary hover:text-primary ">
+          View All Products
         </button>
       </div>
     </section>

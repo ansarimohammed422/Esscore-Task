@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   motion,
   AnimatePresence,
@@ -13,14 +13,13 @@ import { Link } from "react-router-dom";
 
 function Certificates() {
   const [activeTab, setActiveTab] = useState("fssai");
-  const containerRef = React.useRef(null);
+  const containerRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
-  // Parallax effects
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, 50]);
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 5]);
@@ -57,14 +56,13 @@ function Certificates() {
 
   const activeCert = certificates.find((cert) => cert.id === activeTab);
 
-  // Animation variants
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
       },
     },
   };
@@ -79,7 +77,7 @@ function Certificates() {
         damping: 12,
         stiffness: 50,
         mass: 0.5,
-        delay: i * 0.15,
+        delay: i * 0.1,
       },
     }),
   };
@@ -89,7 +87,7 @@ function Certificates() {
       y: 100,
       opacity: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.6,
         ease: [0.33, 1, 0.68, 1],
       },
     },
@@ -97,7 +95,7 @@ function Certificates() {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.8,
+        duration: 0.6,
         ease: [0.33, 1, 0.68, 1],
       },
     },
@@ -105,20 +103,8 @@ function Certificates() {
       y: -100,
       opacity: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.5,
         ease: [0.33, 1, 0.68, 1],
-      },
-    },
-  };
-
-  const floating = {
-    float: {
-      y: ["0%", "-10%", "0%"],
-      transition: {
-        duration: 6,
-        ease: "easeInOut",
-        repeat: Infinity,
-        repeatType: "reverse",
       },
     },
   };
@@ -129,13 +115,13 @@ function Certificates() {
       ref={containerRef}
       className="relative bg-surface-container-lowest py-16 overflow-hidden"
     >
-      {/* Background elements */}
+      {/* Background blobs */}
       <motion.div
         style={{ y: y1, rotate }}
         className="absolute -left-40 -top-40 w-96 h-96 rounded-full bg-primary/10 blur-3xl"
       />
       <motion.div
-        style={{ y: y2, rotate: rotate }}
+        style={{ y: y2, rotate }}
         className="absolute -right-40 -bottom-40 w-96 h-96 rounded-full bg-secondary/10 blur-3xl"
       />
 
@@ -148,18 +134,10 @@ function Certificates() {
       >
         {/* Header */}
         <motion.div variants={item} custom={0} className="text-center mb-20">
-          <motion.h2
-            className="text-display-md font-roboto-medium text-on-background mb-6"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
+          <motion.h2 className="text-display-md font-roboto-medium text-on-background mb-6">
             Our Certifications
           </motion.h2>
-          <motion.p
-            className="text-body-lg text-on-surface-variant max-w-2xl mx-auto"
-            whileHover={{ x: 5 }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
+          <motion.p className="text-body-lg text-on-surface-variant max-w-2xl mx-auto">
             Rigorous standards that build trust across every partnership
           </motion.p>
         </motion.div>
@@ -176,14 +154,8 @@ function Certificates() {
               onClick={() => setActiveTab(cert.id)}
               variants={item}
               custom={cert.id === "fssai" ? 1.5 : cert.id === "iso" ? 1.8 : 2.1}
-              whileHover={{
-                y: -8,
-                scale: 1.05,
-                backgroundColor: `var(--color-${cert.color})`,
-                color: `var(--color-on-${cert.color})`,
-              }}
-              whileTap={{ scale: 0.9 }}
-              className={`px-8 py-4 rounded-full text-title-md font-roboto-medium shadow-lg ${
+              whileTap={{ scale: 0.95 }}
+              className={`px-8 py-4 rounded-full text-title-md font-roboto-medium shadow-lg transition-colors duration-300 ${
                 activeTab === cert.id
                   ? `bg-${cert.color} text-on-${cert.color}`
                   : "bg-surface-container-high text-on-surface-variant"
@@ -203,13 +175,10 @@ function Certificates() {
               initial="enter"
               animate="center"
               exit="exit"
-              className="flex flex-col md:flex-row items-center gap-12"
+              className="flex flex-col md:flex-row items-center md:items-start gap-12"
             >
-              <motion.div
-                variants={floating}
-                animate="float"
-                className="w-full md:w-1/2"
-              >
+              {/* Image */}
+              <div className="w-full md:w-1/2 flex justify-center rounded-xl overflow-hidden">
                 <motion.img
                   src={activeCert.image}
                   alt={activeCert.title}
@@ -224,43 +193,44 @@ function Certificates() {
                     damping: 10,
                   }}
                 />
-              </motion.div>
+              </div>
 
-              <div className="w-full md:w-1/2">
+              {/* Text */}
+              <div className="w-full md:w-1/2 flex flex-col justify-center min-h-[400px]">
                 <motion.h3
                   className={`text-title-xl font-roboto-medium text-${activeCert.color} mb-6`}
-                  initial={{ x: -50, opacity: 0 }}
+                  initial={{ x: -40, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.4 }}
+                  transition={{ type: "spring", stiffness: 80, delay: 0.3 }}
                 >
                   {activeCert.title}
                 </motion.h3>
                 <motion.p
                   className="text-body-lg text-on-surface-variant mb-8"
-                  initial={{ x: 50, opacity: 0 }}
+                  initial={{ x: 40, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.6 }}
+                  transition={{ type: "spring", stiffness: 80, delay: 0.5 }}
                 >
                   {activeCert.description}
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 0.8 }}
+                  transition={{ delay: 0.7 }}
                 >
                   <Link
                     to="/certificates"
                     className={`flex items-center gap-3 text-label-xl font-roboto-medium text-${activeCert.color} w-fit`}
                   >
                     <motion.span
-                      whileHover={{ x: 10 }}
+                      whileHover={{ x: 8 }}
                       transition={{ type: "spring", stiffness: 200 }}
                     >
                       Explore All Certifications
                     </motion.span>
                     <motion.span
                       animate={{
-                        x: [0, 8, 0],
+                        x: [0, 6, 0],
                         rotate: [0, 45, 0],
                       }}
                       transition={{

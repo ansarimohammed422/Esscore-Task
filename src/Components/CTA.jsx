@@ -2,10 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 
 export default function CTA() {
-  // Define M3 Expressive spring transitions for Framer Motion
   const expressiveSpatialTransition = {
     type: "spring",
-    stiffness: 200, // For smooth spatial transitions
+    stiffness: 200,
     damping: 20,
     mass: 1,
     velocity: 0,
@@ -13,13 +12,12 @@ export default function CTA() {
 
   const expressiveEffectsTransition = {
     type: "spring",
-    stiffness: 300, // For quicker effects (e.g., button hovers)
+    stiffness: 300,
     damping: 25,
     mass: 0.8,
     velocity: 0,
   };
 
-  // Variants for the main banner to slide up/fade in
   const bannerVariants = {
     hidden: { opacity: 0, y: 50, scale: 0.98 },
     visible: {
@@ -30,21 +28,24 @@ export default function CTA() {
     },
   };
 
-  // Variants for internal elements to stagger in
   const contentStaggerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08, // Very small stagger for tight packing
-        delayChildren: 0.2, // Initial delay for content elements
+        staggerChildren: 0.08,
+        delayChildren: 0.2,
       },
     },
   };
 
   const itemFadeInVariants = {
     hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0, transition: expressiveEffectsTransition },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: expressiveEffectsTransition,
+    },
   };
 
   return (
@@ -52,58 +53,56 @@ export default function CTA() {
       id="contact"
       className="w-full py-16 px-4 font-roboto bg-surface-container-lowest overflow-hidden flex items-center justify-center"
     >
-      <div className="container mx-auto relative z-10 max-w-7xl">
+      <div className="container mx-auto max-w-7xl relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.6 }} // Trigger when 60% of the card is visible
+          viewport={{ once: true, amount: 0.6 }}
           variants={bannerVariants}
-          className="bg-primary-container rounded-xl-inc shadow-xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6" // M3E colors, shapes, shadow, and flex for layout
+          className="bg-primary-container rounded-xl-inc shadow-xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6"
         >
-          {/* Main Headline */}
+          {/* Headline and Subtext */}
           <motion.div
             variants={contentStaggerVariants}
             className="text-center md:text-left flex-shrink-0"
           >
             <motion.h1
               variants={itemFadeInVariants}
-              className="text-headline-md md:text-display-sm font-roboto-medium text-on-primary-container leading-tight" // M3E Typography
+              className="text-headline-md md:text-display-sm font-roboto-medium text-on-primary-container leading-tight"
             >
               Ready to <span className="text-primary">Elevate</span> Your
               Industry?
             </motion.h1>
-            {/* Very compact sub-headline */}
             <motion.p
               variants={itemFadeInVariants}
-              className="text-body-lg text-on-primary-container/80 mt-1" // M3E Typography
+              className="text-body-lg text-on-primary-container/80 mt-1"
             >
               Connect with our experts today.
             </motion.p>
           </motion.div>
 
-          {/* Actions - Grouped for compactness */}
+          {/* CTA Buttons */}
           <motion.div
             variants={contentStaggerVariants}
-            className="flex flex-col sm:flex-row items-center gap-4 flex-shrink-0" // Buttons grouped side-by-side on small screens, stacked otherwise
+            className="flex flex-col sm:flex-row items-center gap-4 flex-shrink-0"
           >
-            {/* Primary CTA Button */}
+            {/* Primary Button */}
             <motion.a
               variants={itemFadeInVariants}
-              href="/contact" // Standard HTML link for primary contact
-              className="inline-flex items-center justify-center gap-2 bg-primary text-on-primary rounded-lg-inc text-label-lg font-roboto-medium px-6 py-3 shadow-md" // Prominent M3E filled button style
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 bg-primary text-on-primary rounded-lg-inc text-label-lg font-roboto-medium px-6 py-3 shadow-md focus:outline-none focus-visible:ring-2 ring-on-primary ring-offset-2 ring-offset-primary"
               whileHover={{
                 scale: 1.05,
                 boxShadow: "0px 6px 12px rgba(0,0,0,0.2)",
-              }} // M3E elevation on hover
+              }}
               whileTap={{ scale: 0.95 }}
               transition={expressiveEffectsTransition}
             >
-              {/* Inline SVG for Contact icon (e.g., Mail) */}
+              {/* Mail Icon */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
                 height="20"
-                viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
@@ -116,53 +115,53 @@ export default function CTA() {
               Contact Us
             </motion.a>
 
-            {/* Secondary CTA Buttons - Compact group */}
+            {/* Secondary Buttons */}
             <motion.div
               variants={contentStaggerVariants}
-              className="flex gap-3" // Tighter gap for secondary buttons
+              className="flex gap-3"
             >
+              {/* Phone */}
               <motion.a
                 variants={itemFadeInVariants}
-                href="tel:+919999999999" // Standard HTML link for phone
-                className="inline-flex items-center justify-center bg-surface-container-low text-on-surface-variant rounded-full w-10 h-10 shadow-sm border border-outline/30" // M3E tonal button, small, round, icon-only
+                href="tel:+919999999999"
+                aria-label="Call Us"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-low text-on-surface-variant border border-outline/30 shadow-sm focus:outline-none focus-visible:ring-2 ring-outline ring-offset-2"
                 whileHover={{
                   scale: 1.1,
                   boxShadow: "0px 3px 6px rgba(0,0,0,0.1)",
                 }}
                 whileTap={{ scale: 0.9 }}
                 transition={expressiveEffectsTransition}
-                aria-label="Call Us"
               >
-                {/* Inline SVG for Phone icon */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
                   height="20"
-                  viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-3.7-3.7A19.79 19.79 0 0 1 2.05 4.18c0-1.1.9-2.18 2-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-0.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-0.45 12.84 12.84 0 0 0 2.81 0.7A2 2 0 0 1 22 16.92z" />
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-3.7-3.7A19.79 19.79 0 0 1 2.05 4.18c0-1.1.9-2.18 2-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
               </motion.a>
+
+              {/* WhatsApp */}
               <motion.a
                 variants={itemFadeInVariants}
                 href="https://wa.me/919999999999"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-surface-container-low text-on-surface-variant rounded-full w-10 h-10 shadow-sm border border-outline/30" // M3E tonal button, small, round, icon-only
+                aria-label="WhatsApp Chat"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-low text-on-surface-variant border border-outline/30 shadow-sm focus:outline-none focus-visible:ring-2 ring-outline ring-offset-2"
                 whileHover={{
                   scale: 1.1,
                   boxShadow: "0px 3px 6px rgba(0,0,0,0.1)",
                 }}
                 whileTap={{ scale: 0.9 }}
                 transition={expressiveEffectsTransition}
-                aria-label="WhatsApp Chat"
               >
-                {/* Inline SVG for WhatsApp icon */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
