@@ -24,14 +24,14 @@ export default function AboutUsSectionNewLayout() {
         whileInView={{ y: 0, x: 0, opacity: 0.2 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
         viewport={{ once: true }}
-        className="absolute top-0 left-0 w-72 h-72 rounded-full bg-primary-container blur-3xl z-0"
+        className="absolute top-0 left-0 w-72 h-72 rounded-full bg-primary blur-3xl z-0"
       />
       <motion.div
         initial={{ y: 80, x: 80, opacity: 0 }}
         whileInView={{ y: 0, x: 0, opacity: 0.2 }}
         transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
         viewport={{ once: true }}
-        className="absolute bottom-0 right-0 w-72 h-72 rounded-full bg-secondary-container blur-3xl z-0"
+        className="absolute bottom-0 right-0 w-72 h-72 rounded-full bg-primary blur-3xl z-0"
       />
 
       <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center lg:items-start">
