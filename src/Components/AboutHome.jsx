@@ -38,7 +38,7 @@ export default function AboutUsSectionNewLayout() {
         {/* Image Side */}
         <div style={{ perspective: "1200px" }}>
           <motion.div
-            initial={{ x: 100, opacity: 0, rotateY: -15 }}
+            initial={{ x: -100, opacity: 0, rotateY: 15 }} // from left
             whileInView={{ x: 0, opacity: 1, rotateY: 0 }}
             transition={{ ...springConfig, delay: 0.2 }}
             viewport={{ once: false, amount: 0.5 }}

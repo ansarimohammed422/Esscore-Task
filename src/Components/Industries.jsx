@@ -129,7 +129,7 @@ const IndustriesGrid = () => {
       initial="hidden"
       whileInView="visible"
       id="industries"
-      viewport={{ once: false, amount: 0.5 }}
+      viewport={{ once: true }}
     >
       <motion.div
         style={{ y: y1, rotate }}
@@ -173,7 +173,7 @@ const IndustriesGrid = () => {
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.5 }}
+              viewport={{ once: true }}
               className={`relative bg-surface-container-high rounded-3xl overflow-hidden shadow-elevation transition-all cursor-pointer ${cardSize}`}
               onHoverStart={() => !isMobile && setHovered(true)}
               onHoverEnd={() => !isMobile && setHovered(false)}
