@@ -15,7 +15,7 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", path: "home" },
     { name: "About Us", path: "about" },
-    { name: "Products", path: "products" },
+    { name: "Products", path: "product" },
     { name: "Industries", path: "industries" },
     { name: "Services", path: "services" },
     { name: "Certifications", path: "certificates" },
@@ -42,7 +42,7 @@ export default function Navbar() {
     const el = document.getElementById(id);
     if (!el) return;
     // Calculate scroll position, accounting for fixed navbar height
-    const top = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT;
+    const top = el.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({ top, behavior: "smooth" });
     setMenuOpen(false); // Close mobile menu after clicking a link
   };
