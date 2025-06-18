@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { SiMoleculer } from "react-icons/si";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -142,24 +143,10 @@ export default function Navbar() {
                 e.preventDefault();
                 scrollToSection("home");
               }}
-              className="flex items-center"
+              className="flex items-center "
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="inline-block mr-2"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="3" />
-                <path d="M7 12h-2c-1.1 0-2 .9-2 2v2c0 1.1.9 2 2 2h2m0-8h-2c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2h2m10 8h2c1.1 0 2-.9 2-2v-2c0-1.1-.9-2-2-2h-2m0 8h2c1.1 0 2-.9 2-2v-2c0-1.1-.9-2-2-2h-2" />
-              </svg>
-              Esscore
+              <SiMoleculer className="inline-block mr-2" />
+              <div className="font-bold">Esscore</div>
             </a>
           </motion.div>
 
