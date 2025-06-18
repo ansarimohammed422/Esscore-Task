@@ -143,9 +143,14 @@ export default function Navbar() {
                 e.preventDefault();
                 scrollToSection("home");
               }}
-              className="flex items-center "
+              className={`flex items-center ${
+                isScrolled ? "text-on-primary" : "text-primary"
+              }"`}
             >
-              <SiMoleculer className="inline-block mr-2" />
+              <SiMoleculer
+                className={`inline-block mr-2  fill-current               
+`}
+              />
               <div className="font-bold">Esscore</div>
             </a>
           </motion.div>

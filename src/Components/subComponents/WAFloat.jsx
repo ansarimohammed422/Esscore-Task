@@ -25,7 +25,7 @@ export default function WAFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="WhatsApp Chat"
-      className="fixed bottom-6 right-6 z-[9999] flex items-center justify-center p-4 rounded-full shadow-xl cursor-pointer bg-tertiary text-on-tertiary" // M3E colors, shadow, rounded-full
+      className="fixed bottom-3 right-3 z-[9999] flex items-center justify-center p-4 rounded-full shadow-xl cursor-pointer bg-tertiary text-on-tertiary" // M3E colors, shadow, rounded-full
       initial={{ opacity: 0, y: 100 }} // Starts off-screen below
       animate={{ opacity: 1, y: 0 }} // Slides up into view
       transition={{ ...expressiveSpatialTransition, delay: 0.8 }} // Delayed entrance
@@ -37,7 +37,7 @@ export default function WAFloat() {
       whileTap={{ scale: 0.9 }} // Shrink on tap
     >
       {/* Inline SVG for WhatsApp icon */}
-      <IoLogoWhatsapp size={40} />
+      <IoLogoWhatsapp size={24} />
     </motion.a>
   );
 }
