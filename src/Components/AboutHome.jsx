@@ -1,7 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Users, Briefcase, Sparkles } from "lucide-react";
 import abtImg from "../assets/AboutImage.jpg";
+import { LuBriefcaseBusiness } from "react-icons/lu";
+import { IoSparklesOutline } from "react-icons/io5";
+import { TbUsers } from "react-icons/tb";
 
 export default function AboutUsSectionNewLayout() {
   const springConfig = {
@@ -88,21 +90,21 @@ export default function AboutUsSectionNewLayout() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8 w-full">
             {[
               {
-                Icon: Users,
+                Icon: TbUsers,
                 title: "Expert Team",
                 desc: "Our diverse team of experts brings unparalleled knowledge and dedication to every project.",
                 delay: 0.3,
                 iconColor: "text-primary",
               },
               {
-                Icon: Briefcase,
+                Icon: LuBriefcaseBusiness,
                 title: "Global Network",
                 desc: "Connecting you to a vast, reliable global network of trusted manufacturers and suppliers.",
                 delay: 0.4,
                 iconColor: "text-secondary",
               },
               {
-                Icon: Sparkles,
+                Icon: IoSparklesOutline,
                 title: "Innovative Approach",
                 desc: "Continuously exploring new solutions and technologies to meet tomorrow's demands.",
                 delay: 0.5,
