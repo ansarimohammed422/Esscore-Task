@@ -906,6 +906,219 @@
 //     </>
 //   );
 // }
+// import { useEffect, useState } from "react";
+// import { motion, AnimatePresence } from "framer-motion";
+// import { SiMoleculer } from "react-icons/si";
+
+// export default function Navbar() {
+//   const [isScrolled, setIsScrolled] = useState(false);
+//   const [menuOpen, setMenuOpen] = useState(false);
+//   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+//   const [expanded, setExpanded] = useState(false);
+//   const [lastScrollY, setLastScrollY] = useState(0);
+
+//   const NAV_HEIGHT = 64;
+
+//   const navLinks = [
+//     { name: "Home", path: "home" },
+//     { name: "About Us", path: "about" },
+//     { name: "Products", path: "product" },
+//     { name: "Industries", path: "industries" },
+//     { name: "Services", path: "services" },
+//     { name: "Certifications", path: "certificates" },
+//     { name: "Contact", path: "contact" },
+//   ];
+
+//   const spring = {
+//     type: "spring",
+//     stiffness: 220,
+//     damping: 30,
+//     mass: 0.9,
+//     velocity: 2,
+//   };
+
+//   const scrollToSection = (id) => {
+//     const el = document.getElementById(id);
+//     if (!el) return;
+//     const top = el.getBoundingClientRect().top + window.scrollY;
+//     window.scrollTo({ top, behavior: "smooth" });
+//     setMenuOpen(false);
+//   };
+
+//   useEffect(() => {
+//     const onScroll = () => {
+//       const currentScrollY = window.scrollY;
+//       if (currentScrollY === 0) {
+//         setIsScrolled(false);
+//       } else if (currentScrollY > lastScrollY && currentScrollY > 10) {
+//         setIsScrolled(true);
+//         setExpanded(false);
+//       } else if (currentScrollY < lastScrollY) {
+//         setIsScrolled(false);
+//       }
+//       setLastScrollY(currentScrollY);
+//     };
+//     window.addEventListener("scroll", onScroll);
+//     return () => window.removeEventListener("scroll", onScroll);
+//   }, [lastScrollY]);
+
+//   useEffect(() => {
+//     const onResize = () => {
+//       setIsMobile(window.innerWidth < 640);
+//       if (window.innerWidth >= 640) setMenuOpen(false);
+//     };
+//     onResize();
+//     window.addEventListener("resize", onResize);
+//     return () => window.removeEventListener("resize", onResize);
+//   }, []);
+
+//   const collapsedPill = (
+//     <motion.div
+//       className="fixed top-2 left-1/2 transform -translate-x-1/2 z-50 cursor-pointer bg-primary shadow-lg"
+//       initial={{ width: 180, height: 15, borderRadius: 9999, opacity: 0 }}
+//       animate={{ width: 180, height: 15, borderRadius: 9999, opacity: 1 }}
+//       whileHover={{ scale: 1.12 }}
+//       transition={spring}
+//       onClick={() => setExpanded(true)}
+//       onMouseEnter={() => setExpanded(true)}
+//     />
+//   );
+
+//   const fullNavbar = (
+//     <motion.nav
+//       initial={{ height: 8, width: 100, borderRadius: 9999, opacity: 0 }}
+//       animate={{
+//         height: NAV_HEIGHT,
+//         width: "calc(100% - 1rem)",
+//         borderRadius: 9999,
+//         opacity: 1,
+//       }}
+//       exit={{ opacity: 0, y: -20 }}
+//       transition={spring}
+//       className={`fixed top-2 left-1/2 transform -translate-x-1/2 z-50 shadow-md px-4 transition-colors duration-300 ${
+//         isScrolled ? "bg-primary text-on-primary" : "bg-surface text-primary"
+//       }`}
+//       style={{ backdropFilter: "blur(10px)" }}
+//     >
+//       <div className="flex justify-between items-center px-4 py-4">
+//         <motion.div
+//           className="flex items-center font-bold text-headline-sm"
+//           whileHover={{ scale: 1.05 }}
+//           whileTap={{ scale: 0.95 }}
+//           transition={spring}
+//         >
+//           <a
+//             href="#home"
+//             onClick={(e) => {
+//               e.preventDefault();
+//               scrollToSection("home");
+//               setExpanded(false);
+//             }}
+//             className="flex items-center"
+//           >
+//             <SiMoleculer className="mr-2" />
+//             Esscore
+//           </a>
+//         </motion.div>
+
+//         {!isMobile && (
+//           <ul className="flex gap-5 font-medium">
+//             {navLinks.map((link) => (
+//               <motion.li
+//                 key={link.path}
+//                 whileHover={{
+//                   backgroundColor: isScrolled
+//                     ? "rgba(255,255,255,0.08)"
+//                     : "rgba(103,80,164,0.08)",
+//                   borderRadius: "8px",
+//                 }}
+//                 whileTap={{
+//                   backgroundColor: isScrolled
+//                     ? "rgba(255,255,255,0.12)"
+//                     : "rgba(103,80,164,0.12)",
+//                   borderRadius: "8px",
+//                 }}
+//                 transition={spring}
+//                 className="rounded-sm"
+//               >
+//                 <a
+//                   href={`#${link.path}`}
+//                   onClick={(e) => {
+//                     e.preventDefault();
+//                     scrollToSection(link.path);
+//                     setExpanded(false);
+//                   }}
+//                   className="block px-3 py-2 text-label-lg "
+//                 >
+//                   {link.name}
+//                 </a>
+//               </motion.li>
+//             ))}
+//           </ul>
+//         )}
+
+//         {isMobile && (
+//           <motion.button
+//             onClick={() => setMenuOpen((o) => !o)}
+//             className="text-2xl"
+//             whileHover={{ scale: 1.1 }}
+//             whileTap={{ scale: 0.9 }}
+//             transition={spring}
+//           >
+//             {menuOpen ? "✕" : "☰"}
+//           </motion.button>
+//         )}
+//       </div>
+//     </motion.nav>
+//   );
+
+//   return (
+//     <>
+//       <AnimatePresence>
+//         {!expanded && isScrolled && collapsedPill}
+//       </AnimatePresence>
+//       <AnimatePresence>
+//         {expanded || !isScrolled ? fullNavbar : null}
+//       </AnimatePresence>
+
+//       <AnimatePresence>
+//         {isMobile && menuOpen && (
+//           <motion.ul
+//             initial={{ opacity: 0, y: -30 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             exit={{ opacity: 0, y: -30 }}
+//             transition={spring}
+//             className="fixed top-[80px] left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] bg-surface-container-high p-6 rounded-2xl shadow-lg space-y-4 font-medium text-center z-40"
+//           >
+//             {navLinks.map((link) => (
+//               <motion.li
+//                 key={link.path}
+//                 whileHover={{ backgroundColor: "rgba(103,80,164,0.08)" }}
+//                 whileTap={{ backgroundColor: "rgba(103,80,164,0.12)" }}
+//                 transition={spring}
+//                 className="w-full rounded-2xl"
+//               >
+//                 <a
+//                   href={`#${link.path}`}
+//                   onClick={(e) => {
+//                     e.preventDefault();
+//                     scrollToSection(link.path);
+//                     setExpanded(false);
+//                     setMenuOpen(false);
+//                   }}
+//                   className="block py-2 text-label-lg text-on-surface hover:text-primary"
+//                 >
+//                   {link.name}
+//                 </a>
+//               </motion.li>
+//             ))}
+//           </motion.ul>
+//         )}
+//       </AnimatePresence>
+//     </>
+//   );
+// }
+
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SiMoleculer } from "react-icons/si";
@@ -914,7 +1127,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const NAV_HEIGHT = 64;
@@ -948,19 +1161,26 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       const currentScrollY = window.scrollY;
+
       if (currentScrollY === 0) {
         setIsScrolled(false);
-      } else if (currentScrollY > lastScrollY && currentScrollY > 10) {
+        setExpanded(true);
+      } else {
         setIsScrolled(true);
-        setExpanded(false);
-      } else if (currentScrollY < lastScrollY) {
-        setIsScrolled(false);
+
+        if (currentScrollY > lastScrollY && expanded) {
+          setExpanded(false); // hide on scroll down
+        } else if (currentScrollY < lastScrollY && !expanded) {
+          setExpanded(true); // show on scroll up
+        }
       }
+
       setLastScrollY(currentScrollY);
     };
+
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-  }, [lastScrollY]);
+  }, [lastScrollY, expanded]);
 
   useEffect(() => {
     const onResize = () => {
@@ -986,10 +1206,10 @@ export default function Navbar() {
 
   const fullNavbar = (
     <motion.nav
-      initial={{ height: 8, width: 100, borderRadius: 9999, opacity: 0 }}
+      initial={{ height: 14, width: 100, borderRadius: 9999, opacity: 0 }}
       animate={{
         height: NAV_HEIGHT,
-        width: "calc(100% - 1rem)",
+        width: "calc(100% - 2rem)",
         borderRadius: 9999,
         opacity: 1,
       }}
@@ -1077,9 +1297,7 @@ export default function Navbar() {
       <AnimatePresence>
         {!expanded && isScrolled && collapsedPill}
       </AnimatePresence>
-      <AnimatePresence>
-        {expanded || !isScrolled ? fullNavbar : null}
-      </AnimatePresence>
+      <AnimatePresence>{expanded ? fullNavbar : null}</AnimatePresence>
 
       <AnimatePresence>
         {isMobile && menuOpen && (
