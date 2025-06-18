@@ -109,7 +109,7 @@ export default function Hero() {
         ))}
       </motion.div>
 
-      <div className="absolute inset-0 bg-scrim/50 z-10" />
+      <div className="absolute inset-0 bg-background/70 z-10" />
 
       <div className="relative z-20 container mx-auto flex flex-col lg:flex-row items-center justify-center lg:justify-between h-full px-4 md:px-8 lg:px-16">
         <motion.div

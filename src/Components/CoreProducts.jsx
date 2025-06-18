@@ -70,7 +70,7 @@ const StackedCardSlider = () => {
       className="w-full min-h-screen bg-surface-variant py-16 px-4 flex flex-col items-center"
     >
       <h2 className="text-4xl font-bold text-primary mb-4">Core Products</h2>
-      <p className="text-gray-600 mb-10 max-w-xl text-center">
+      <p className="text-on-surface mb-10 max-w-xl text-center">
         Scroll through our key offerings using the arrows below. Each card
         contains a high-quality product description and call to action.
       </p>
