@@ -1249,7 +1249,7 @@ export default function Navbar() {
                 whileHover={{
                   backgroundColor: isScrolled
                     ? "rgba(255,255,255,0.08)"
-                    : "rgba(255,255,255,0.08)",
+                    : "rgba(103,80,164,0.12)",
                   borderRadius: "8px",
                 }}
                 whileTap={{
