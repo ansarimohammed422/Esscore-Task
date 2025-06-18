@@ -23,14 +23,14 @@ export default function AboutUsSectionNewLayout() {
         initial={{ y: -80, x: -80, opacity: 0 }}
         whileInView={{ y: 0, x: 0, opacity: 0.2 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
-        viewport={{ once: true }}
+        viewport={{ once: false, amount: 0.5 }}
         className="absolute top-0 left-0 w-72 h-72 rounded-full bg-primary blur-3xl z-0"
       />
       <motion.div
         initial={{ y: 80, x: 80, opacity: 0 }}
         whileInView={{ y: 0, x: 0, opacity: 0.2 }}
         transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
-        viewport={{ once: true }}
+        viewport={{ once: false, amount: 0.5 }}
         className="absolute bottom-0 right-0 w-72 h-72 rounded-full bg-primary blur-3xl z-0"
       />
 
@@ -41,7 +41,7 @@ export default function AboutUsSectionNewLayout() {
             initial={{ x: 100, opacity: 0, rotateY: -15 }}
             whileInView={{ x: 0, opacity: 1, rotateY: 0 }}
             transition={{ ...springConfig, delay: 0.2 }}
-            viewport={{ once: true, amount: 0.4 }}
+            viewport={{ once: false, amount: 0.5 }}
             className="relative w-full h-[450px] md:h-[600px] bg-surface-container-high rounded-2xl overflow-hidden shadow-2xl"
           >
             <img
@@ -54,7 +54,7 @@ export default function AboutUsSectionNewLayout() {
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ ...springConfig, delay: 0.5 }}
-              viewport={{ once: true, amount: 0.5 }}
+              viewport={{ once: false, amount: 0.5 }}
               className="absolute bottom-6 left-6 right-6 p-6 bg-primary-container/90 backdrop-blur-sm rounded-xl-inc text-on-primary-container text-title-md md:text-headline-sm font-roboto-medium shadow-lg"
             >
               "Innovation, Quality, Partnership: The Esscore Promise."
@@ -69,7 +69,7 @@ export default function AboutUsSectionNewLayout() {
             initial={{ y: -30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={springConfig}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: false, amount: 0.5 }}
           >
             Unveiling <span className="text-primary">Our Journey</span>
           </motion.h2>
@@ -79,7 +79,7 @@ export default function AboutUsSectionNewLayout() {
             initial={{ y: -20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ ...springConfig, delay: 0.1 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: false, amount: 0.5 }}
           >
             At Esscore Foundation, we believe in building bridges, not just
             supply chains. For years, we've dedicated ourselves to providing
@@ -133,7 +133,7 @@ export default function AboutUsSectionNewLayout() {
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ ...springConfig, delay: 0.6 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: false, amount: 0.5 }}
             whileHover={{
               scale: 1.045,
               backgroundColor: "rgba(103, 80, 164, 0.9)",
